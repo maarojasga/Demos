@@ -1,0 +1,15 @@
+name: Run Databricks Job
+
+on:
+  workflow_dispatch:
+
+jobs:
+  trigger-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Job in Databricks
+        run: |
+          curl -X POST https://${{ secrets.DATABRICKS_HOST }}/api/2.1/jobs/run-now \
+          -H "Authorization: Bearer ${{ secrets.DATABRICKS_TOKEN }}" \
+          -H "Content-Type: application/json" \
+          -d '{"job_id": 742053210909549}'
